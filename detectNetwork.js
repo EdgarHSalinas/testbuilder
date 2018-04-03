@@ -14,6 +14,7 @@ var detectNetwork = function(cardNumber) {
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
   var cardLength = cardNumber.length;
+  var pre1 = cardNumber.slice(0,1);
   var pre2 = cardNumber.slice(0,2);
  
 
@@ -23,6 +24,16 @@ var detectNetwork = function(cardNumber) {
   if (cardLength === 15 && pre2 === '34' || pre2 === '37') {
   	return 'American Express';
   }
+  if ((cardLength === 13 || cardLength === 16 || cardLength === 19) && pre1 === '4') {
+    return "Visa";
+  }
+  if (cardLength === 16 && cardRange(pre2, 51, 55)) {
+  	return 'MasterCard';
+  }
+
+
 };
 
-
+function cardRange(prefix, min, max) {
+  return prefix >= min && prefix <= max;
+}
