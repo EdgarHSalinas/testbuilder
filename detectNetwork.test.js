@@ -166,9 +166,100 @@ describe('Discover', function() {
   });
   
 }); 
+
+var createTestArrayForCardLength = function(preCard, minL, maxL) {
+  var cardTestL = [];
+  var cardNumbers = preCard.split('');
+  
+  for (var i = minL; i <= maxL; i++) {
+    var lastDigit = i.toString().charAt(1);
+    cardNumbers.push(lastDigit);
+    cardTestL[i] = cardNumbers.join('');
+  }
+  
+  return cardTestL
+}
+
 describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
+  var expect = chai.expect;
+
+  var card5018 = createTestArrayForCardLength('50180123456', 12, 19)
+
+  for (var cardL = 12; cardL <= 19; cardL++) {
+    (function(cardL){
+      it('has a prefix of 5018 and a length of ' + cardL, function(){
+        expect(detectNetwork(card5018[cardL])).to.equal('Maestro');
+      });
+    })(cardL);
+  }
+
+ var card5020 = createTestArrayForCardLength('50200123456', 12, 19)
+
+  for (var cardL = 12; cardL <= 19; cardL++) {
+    (function(cardL){
+      it('has a prefix of 5020 and a length of ' + cardL, function(){
+        expect(detectNetwork(card5020[cardL])).to.equal('Maestro');
+      });
+    })(cardL);
+  }
+
+ var card5038 = createTestArrayForCardLength('50380123456', 12, 19)
+
+  for (var cardL = 12; cardL <= 19; cardL++) {
+    (function(cardL){
+      it('has a prefix of 5038 and a length of ' + cardL, function(){
+        expect(detectNetwork(card5038[cardL])).to.equal('Maestro');
+      });
+    })(cardL);
+  }
+
+  var card6304 = createTestArrayForCardLength('63040123456', 12, 19)
+
+  for (var cardL = 12; cardL <= 19; cardL++) {
+    (function(cardL){
+      it('has a prefix of 6304 and a length of ' + cardL, function(){
+        expect(detectNetwork(card6304[cardL])).to.equal('Maestro');
+      });
+    })(cardL);
+  }
 });
 
 describe('should support China UnionPay')
 describe('should support Switch')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

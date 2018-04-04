@@ -36,8 +36,15 @@ var detectNetwork = function(cardNumber) {
   if ((cardLength === 16 || cardLength === 19) && (pre4 === '6011' || cardRange(pre3, 644, 649)|| pre2 === '65')) {
     return "Discover";
   }
+  if ((checkCardLength(cardLength, 12, 19)) && (pre4 === '5018' || pre4 === '5020' || pre4 === '5038' || pre4 === '6304')) {
+    return 'Maestro';
+  }
 };
 
 function cardRange(prefix, min, max) {
   return prefix >= min && prefix <= max;
+}
+
+function checkCardLength(cardLength, min, max) {
+  return cardLength >= min && cardLength <= max;
 }
