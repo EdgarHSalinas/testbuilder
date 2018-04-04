@@ -27,7 +27,7 @@ var detectNetwork = function(cardNumber) {
   if (cardLength === 15 && pre2 === '34' || pre2 === '37') {
   	return 'American Express';
   }
-  if ((cardLength === 13 || cardLength === 16 || cardLength === 19) && pre1 === '4') {
+  if ((cardLength === 13 || cardLength === 16 || cardLength === 19) && pre2.charAt(0) === '4' && pre2.charAt(1) !== '9') {
     return "Visa";
   }
   if (cardLength === 16 && cardRange(pre2, 51, 55)) {
@@ -39,6 +39,27 @@ var detectNetwork = function(cardNumber) {
   if ((checkCardLength(cardLength, 12, 19)) && (pre4 === '5018' || pre4 === '5020' || pre4 === '5038' || pre4 === '6304')) {
     return 'Maestro';
   }
+
+  // China Union Pay
+
+  if ( cardRange(pre6, '622126', '622925') && checkCardLength(cardLength, 16, 19) ) {
+    return 'China UnionPay';
+  }
+  if ( cardRange(pre3, '624', '626') && checkCardLength(cardLength, 16, 19) ) {
+    return 'China UnionPay';
+  }
+  if ( cardRange(pre4, '6282', '6288') && checkCardLength(cardLength, 16, 19) ) {
+    return 'China UnionPay';
+  }
+ 
+  // Switch Pay 
+  if ((checkCardLength(cardLength, 16, 19) && cardLength !== 17 ) && ( pre4 === '4903' || pre4 === '4905' || pre4 === '4911' || pre4 === '4936')) {
+    return 'Switch';
+  }
+  if ((checkCardLength(cardLength, 16, 19) && cardLength !== 17 ) && (pre6 === '564182' || pre6 === '633110' || pre4 === '6333' || pre4 === '6759')) {
+    return 'Switch';
+  }
+
 };
 
 function cardRange(prefix, min, max) {
@@ -48,3 +69,20 @@ function cardRange(prefix, min, max) {
 function checkCardLength(cardLength, min, max) {
   return cardLength >= min && cardLength <= max;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
