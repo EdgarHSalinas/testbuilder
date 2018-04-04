@@ -16,6 +16,9 @@ var detectNetwork = function(cardNumber) {
   var cardLength = cardNumber.length;
   var pre1 = cardNumber.slice(0,1);
   var pre2 = cardNumber.slice(0,2);
+  var pre3 = cardNumber.slice(0,3);
+  var pre4 = cardNumber.slice(0,4);
+  var pre6 = cardNumber.slice(0,6);
  
 
   if (cardLength === 14 && pre2 === '38' || pre2 === '39') {
@@ -30,8 +33,9 @@ var detectNetwork = function(cardNumber) {
   if (cardLength === 16 && cardRange(pre2, 51, 55)) {
   	return 'MasterCard';
   }
-
-
+  if ((cardLength === 16 || cardLength === 19) && (pre4 === '6011' || cardRange(pre3, 644, 649)|| pre2 === '65')) {
+    return "Discover";
+  }
 };
 
 function cardRange(prefix, min, max) {
